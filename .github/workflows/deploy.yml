@@ -1,0 +1,35 @@
+name: ARUK AI Backend Deploy
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check Gemini secret
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          if [ -z "$GEMINI_API_KEY" ]; then
+            echo "GEMINI_API_KEY secret is missing."
+            exit 1
+          fi
+          echo "Gemini secret is configured."
+
+      - name: Deployment status
+        run: |
+          echo "Secret check passed."
+          echo "This workflow does not expose the API key."
+          echo "A secure backend still needs to be configured."
