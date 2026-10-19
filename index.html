@@ -2,196 +2,613 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#080a10">
 <title>ARUK AI | Personal Intelligence</title>
+
 <style>
-:root{--gold:#f5c15c;--cyan:#52e7ff;--bg:#080a10;--panel:#10141e;--muted:#8c96a9}
+:root{
+  --bg:#080a10;
+  --panel:#10141e;
+  --panel2:#151b28;
+  --gold:#f5c15c;
+  --cyan:#52e7ff;
+  --text:#f3f5fa;
+  --muted:#8c96a9;
+  --border:#ffffff12;
+  --green:#69f5b5;
+  --red:#ff657a;
+}
 *{box-sizing:border-box}
-body{margin:0;background:radial-gradient(ellipse at 50% 0,#18202d 0,#080a10 60%);color:#f3f5fa;font-family:Arial,sans-serif;min-height:100vh}
+body{
+  margin:0;
+  background:radial-gradient(ellipse at 50% 0%,#18202d 0%,var(--bg) 65%);
+  color:var(--text);
+  font-family:Arial,Helvetica,sans-serif;
+  min-height:100vh;
+}
 button,input{font:inherit}
 button{cursor:pointer}
-header{height:70px;border-bottom:1px solid #ffffff12;display:flex;align-items:center;justify-content:space-between;padding:0 5%;position:sticky;top:0;background:#080a10eF;backdrop-filter:blur(15px);z-index:5}
-.brand{font-size:23px;letter-spacing:4px;font-weight:900;color:var(--gold)}
-.brand span{color:white}
-.live{font-size:11px;letter-spacing:2px;color:#83f7c2}
-.layout{display:grid;grid-template-columns:225px 1fr;max-width:1450px;margin:auto;min-height:calc(100vh - 70px)}
-aside{padding:25px 15px;border-right:1px solid #ffffff12}
-.section-label{color:#657087;font-size:10px;letter-spacing:2px;margin:15px 10px}
-.nav{display:block;width:100%;text-align:left;padding:13px;border:1px solid transparent;background:transparent;color:#aab3c3;border-radius:10px;margin:4px 0}
-.nav:hover,.nav.active{color:var(--gold);background:#f5c15c0d;border-color:#f5c15c28}
-aside .small{font-size:12px;color:var(--muted);line-height:1.7;padding:10px}
-main{padding:30px 4%;min-width:0}
-.eyebrow{color:var(--cyan);letter-spacing:3px;font-size:10px}
-h1{font-size:clamp(27px,4vw,43px);margin:12px 0}
-.subtitle{color:var(--muted);line-height:1.6}
-.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;gap:15px}
-.orb-area{display:grid;place-items:center;min-height:300px;position:relative;overflow:hidden}
-.orb{width:160px;height:160px;border-radius:50%;position:relative;display:grid;place-items:center;background:radial-gradient(circle at 35% 30%,#fff4b9,#e9a629 12%,#754511 34%,#10141e 67%);box-shadow:0 0 25px #ffbd4b88,0 0 75px #ffbd4b44,inset 0 0 25px #fff4b9;animation:float 4s ease-in-out infinite}
-.orb:before,.orb:after{content:"";position:absolute;inset:-19px;border:1px solid #f5c15c99;border-radius:50%;animation:spin 9s linear infinite}
-.orb:after{inset:-35px;border-color:#52e7ff66;animation-direction:reverse;animation-duration:15s}
-.orb b{font-size:44px;color:#fff5cf;text-shadow:0 0 20px white}
-.orb.speaking{animation:pulse .6s infinite alternate}
-@keyframes float{50%{transform:translateY(-10px)}}
+header{
+  min-height:70px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:15px;
+  padding:12px 24px;
+  border-bottom:1px solid var(--border);
+  background:#080a10ed;
+  position:sticky;
+  top:0;
+  z-index:10;
+  backdrop-filter:blur(15px);
+}
+.brand{font-size:22px;font-weight:900;letter-spacing:4px}
+.brand span{color:var(--gold)}
+.live{font-size:11px;letter-spacing:2px;color:var(--green)}
+.layout{
+  display:grid;
+  grid-template-columns:225px minmax(0,1fr);
+  min-height:calc(100vh - 70px);
+}
+aside{
+  padding:25px 15px;
+  border-right:1px solid var(--border);
+  background:#0c0f17;
+}
+.section-label{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:2px;
+  margin:8px 10px 15px;
+}
+.nav{
+  width:100%;
+  text-align:left;
+  color:#aab3c4;
+  background:transparent;
+  border:1px solid transparent;
+  border-radius:10px;
+  padding:13px 12px;
+  margin-bottom:7px;
+  transition:.2s;
+}
+.nav:hover,.nav.active{
+  background:#f5c15c12;
+  color:var(--gold);
+  border-color:#f5c15c35;
+}
+.aside-note{
+  margin:30px 8px;
+  font-size:12px;
+  color:var(--muted);
+  line-height:1.7;
+}
+main{padding:25px;min-width:0}
+.topline{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:22px;
+}
+.eyebrow{font-size:10px;color:var(--cyan);letter-spacing:3px}
+h1{font-size:clamp(25px,4vw,38px);margin:10px 0}
+.subtitle{color:var(--muted);font-size:14px;line-height:1.6}
+.pill{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  border:1px solid var(--border);
+  border-radius:30px;
+  padding:9px 12px;
+  font-size:11px;
+  color:var(--muted);
+}
+.dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 12px #69f5b5;
+}
+.dashboard{
+  display:grid;
+  grid-template-columns:minmax(0,1.15fr) minmax(300px,.85fr);
+  gap:18px;
+}
+.card{
+  border:1px solid var(--border);
+  border-radius:17px;
+  background:linear-gradient(145deg,#151a27e8,#0e1119e8);
+  padding:20px;
+  min-width:0;
+  box-shadow:0 15px 45px #00000018;
+}
+.card-title{
+  font-size:11px;letter-spacing:2px;color:var(--muted);
+  margin-bottom:18px;
+}
+.hero{
+  min-height:320px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  overflow:hidden;
+  position:relative;
+}
+.orb{
+  width:145px;height:145px;border-radius:50%;
+  position:relative;
+  display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#ffffff,#52e7ff 8%,#176d9b 30%,#101526 65%);
+  box-shadow:0 0 35px #52e7ff45,0 0 90px #52e7ff17,inset -10px -15px 30px #0008;
+  animation:float 4s ease-in-out infinite;
+}
+.orb:before,.orb:after{
+  content:"";position:absolute;border-radius:50%;
+  inset:-14px;border:1px solid #52e7ff80;
+  animation:spin 9s linear infinite;
+}
+.orb:after{
+  inset:-24px;border-color:#f5c15c65;
+  transform:rotateX(65deg);animation-duration:13s;
+}
+.orb-core{
+  font-size:31px;font-weight:900;letter-spacing:3px;
+  color:white;text-shadow:0 0 18px #52e7ff;
+}
+.speaking .orb{animation:pulse .65s infinite alternate}
+@keyframes float{50%{transform:translateY(-8px)}}
 @keyframes spin{to{transform:rotate(360deg)}}
-@keyframes pulse{to{transform:scale(1.1);box-shadow:0 0 70px #ffbd4b}}
-.orb-caption{text-align:center;color:var(--gold);font-size:10px;letter-spacing:3px;margin-top:20px}
-.status{display:flex;align-items:center;gap:8px;font-size:12px;color:#9ca8ba}
-.dot{width:7px;height:7px;border-radius:50%;background:#61f5ba;box-shadow:0 0 12px #61f5ba}
-.actions{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0}
-.btn{border:1px solid #ffffff20;background:#151a25;color:white;border-radius:10px;padding:12px 17px}
-.btn.primary{background:linear-gradient(110deg,#f8d782,#d99a2d);color:#17120a;border:0;font-weight:bold}
-.btn:hover{filter:brightness(1.15)}
-.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin:20px 0}
-.card{background:linear-gradient(145deg,#141a26,#0e1119);border:1px solid #ffffff12;border-radius:15px;padding:18px;min-width:0}
-.icon{font-size:22px}
-.card h3{font-size:14px;margin:13px 0 7px}
-.card p{font-size:12px;color:var(--muted);line-height:1.6;margin:0}
-.badge{font-size:9px;color:var(--cyan);letter-spacing:1px;margin-top:13px;display:inline-block}
-.chat{margin-top:20px}
-.chat h2{font-size:17px}
-.messages{height:180px;overflow:auto;background:#080b11;border:1px solid #ffffff12;border-radius:12px;padding:13px}
-.msg{font-size:13px;line-height:1.6;margin:8px 0;color:#dbe2ee;white-space:pre-wrap;overflow-wrap:anywhere}
-.msg b{color:var(--gold)}
-.chat-form{display:flex;gap:8px;margin-top:10px}
-.chat-form input{min-width:0;flex:1;background:#111620;border:1px solid #ffffff20;border-radius:10px;padding:13px;color:white;outline:none}
-.chat-form input:focus{border-color:var(--gold)}
-footer{text-align:center;color:#586274;font-size:10px;letter-spacing:2px;padding:35px 10px}
-@media(max-width:750px){.layout{grid-template-columns:1fr}aside{border-right:0;border-bottom:1px solid #ffffff12;padding:10px 15px;display:flex;gap:5px;overflow:auto}.section-label,.small{display:none}.nav{white-space:nowrap;width:auto;margin:0;padding:10px;font-size:12px}main{padding:25px 17px}.hero{grid-template-columns:1fr}.orb-area{min-height:245px}.orb{width:130px;height:130px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
-@media(max-width:400px){.grid{grid-template-columns:1fr}.brand{font-size:19px}header{padding:0 15px}}
+@keyframes pulse{to{box-shadow:0 0 55px #52e7ff99,0 0 100px #52e7ff35}}
+.hero h2{font-size:19px;margin:30px 0 8px}
+.hero p{color:var(--muted);font-size:12px;line-height:1.6;margin:0}
+.status-line{font-size:11px;color:var(--cyan);margin-top:15px}
+.controls{display:flex;gap:9px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+.btn{
+  border:1px solid var(--border);border-radius:9px;
+  padding:11px 14px;background:#ffffff08;color:var(--text);
+  transition:.2s;
+}
+.btn:hover{border-color:#52e7ff88;transform:translateY(-1px)}
+.btn.primary{
+  background:linear-gradient(110deg,#f5c15c,#ffe1a0);
+  border:0;color:#17130a;font-weight:800;
+}
+.btn:disabled{opacity:.5;cursor:wait;transform:none}
+.modules{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.module{
+  text-align:left;border:1px solid var(--border);
+  background:#ffffff04;border-radius:12px;padding:15px;
+  color:var(--text);min-height:105px;
+}
+.module:hover{border-color:#52e7ff66;background:#52e7ff08}
+.module-icon{font-size:20px;margin-bottom:12px}
+.module strong{display:block;font-size:12px;margin-bottom:7px}
+.module small{font-size:10px;color:var(--muted);line-height:1.5}
+.chat-card{margin-top:18px}
+.chat-head{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+}
+.messages{
+  display:flex;flex-direction:column;gap:13px;
+  min-height:180px;max-height:360px;overflow-y:auto;
+  padding:8px 2px 15px;
+}
+.message{
+  max-width:90%;padding:12px 14px;border-radius:12px;
+  font-size:13px;line-height:1.65;white-space:pre-wrap;
+  overflow-wrap:anywhere;
+}
+.message.ai{align-self:flex-start;background:#ffffff08;border:1px solid var(--border)}
+.message.user{align-self:flex-end;background:#f5c15c18;border:1px solid #f5c15c35}
+.message .who{
+  font-size:9px;letter-spacing:1.5px;color:var(--cyan);
+  margin-bottom:5px;
+}
+.message.user .who{color:var(--gold)}
+.chat-form{display:flex;gap:9px;border-top:1px solid var(--border);padding-top:15px}
+#prompt{
+  width:100%;min-width:0;border:1px solid var(--border);
+  border-radius:10px;background:#080b12;color:var(--text);
+  outline:none;padding:13px;
+}
+#prompt:focus{border-color:#52e7ff80}
+#prompt::placeholder{color:#667184}
+.send{min-width:75px}
+.footer-note{font-size:10px;color:var(--muted);line-height:1.6;margin-top:12px}
+.stat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:18px}
+.stat{padding:13px;border:1px solid var(--border);border-radius:11px;background:#ffffff03}
+.stat strong{display:block;font-size:17px;color:var(--gold);margin-bottom:5px}
+.stat small{font-size:10px;color:var(--muted)}
+#toast{
+  position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+  background:#202838;border:1px solid var(--border);border-radius:10px;
+  padding:12px 17px;font-size:12px;display:none;z-index:30;
+  max-width:90%;text-align:center;
+}
+@media(max-width:850px){
+  .layout{grid-template-columns:1fr}
+  aside{border-right:0;border-bottom:1px solid var(--border);padding:12px}
+  .section-label,.aside-note{display:none}
+  aside nav{display:flex;gap:6px;overflow-x:auto}
+  .nav{white-space:nowrap;width:auto;margin:0;padding:10px}
+  main{padding:16px}
+  .dashboard{grid-template-columns:1fr}
+}
+@media(max-width:420px){
+  header{padding:12px 15px}
+  .brand{font-size:19px}
+  .modules{grid-template-columns:1fr 1fr}
+  .card{padding:15px}
+  .stat-grid{grid-template-columns:1fr 1fr}
+  .message{max-width:96%}
+}
 </style>
 </head>
+
 <body>
 <header>
   <div class="brand">ARUK <span>AI</span></div>
-  <div class="live">● SYSTEM ONLINE</div>
+  <div class="live">● PERSONAL INTELLIGENCE</div>
 </header>
+
 <div class="layout">
-<aside>
-  <div class="section-label">MAIN SYSTEM</div>
-  <button class="nav active" data-target="home">◈ &nbsp; Overview</button>
-  <button class="nav" data-target="chatbox">◎ &nbsp; AI Console</button>
-  <button class="nav" data-target="modules">⌘ &nbsp; Capabilities</button>
-  <button class="nav" data-target="settings">⚙️ &nbsp; Settings</button>
-  <div class="small">ARUK CORE<br>Personal Intelligence Interface<br><br>Frontend prototype · v0.1</div>
-</aside>
-<main id="home">
-  <div class="eyebrow">PERSONAL INTELLIGENCE SYSTEM / 001</div>
-  <div class="hero">
-    <div>
-      <h1>Good to see you,<br><span style="color:var(--gold)">Commander.</span></h1>
-      <p class="subtitle">Your vision. Your tools. Your intelligence.<br>What shall we work on today?</p>
-      <div class="status"><span class="dot"></span><span id="status">Core interface initialized</span></div>
-      <div class="actions">
-        <button class="btn primary" id="voiceBtn">🎙️ Activate Voice</button>
-        <button class="btn" id="soundBtn">♫ Sound: OFF</button>
+  <aside>
+    <div class="section-label">COMMAND CENTER</div>
+    <nav>
+      <button class="nav active" data-target="home">◈ &nbsp; Overview</button>
+      <button class="nav" data-target="chat">◎ &nbsp; AI Chat</button>
+      <button class="nav" data-target="modules">▦ &nbsp; Systems</button>
+    </nav>
+    <div class="aside-note">
+      <strong style="color:var(--gold)">ARUK CORE</strong><br><br>
+      Personal intelligence interface.<br>
+      Secure backend connection.<br><br>
+      <span style="color:var(--cyan)">Version 2.0 · Online UI</span>
+    </div>
+  </aside>
+
+  <main id="home">
+    <div class="topline">
+      <div>
+        <div class="eyebrow">PERSONAL INTELLIGENCE SYSTEM</div>
+        <h1>Good to see you, Commander.</h1>
+        <div class="subtitle">Your command center is ready. What shall we work on today?</div>
       </div>
-      <p class="subtitle" style="font-size:11px">Voice recognition depends on browser support and microphone permission.</p>
+      <div class="pill"><span class="dot"></span><span id="connection">Interface ready</span></div>
     </div>
-    <div>
-      <div class="orb-area"><div class="orb" id="orb"><b>A</b></div></div>
-      <div class="orb-caption">A R U K &nbsp; / &nbsp; CORE</div>
+
+    <div class="dashboard">
+      <section class="card hero">
+        <div class="card-title">ARUK NEURAL INTERFACE</div>
+        <div class="orb" id="orb"><div class="orb-core">A</div></div>
+        <h2 id="heroTitle">Your AI interface is ready</h2>
+        <p id="heroDesc">Connect to the intelligence engine by sending a message.</p>
+        <div class="status-line" id="systemStatus">SYSTEM STANDBY</div>
+        <div class="controls">
+          <button class="btn primary" id="focusChat">Activate AI Chat</button>
+          <button class="btn" id="voiceBtn">🎙️ Voice Input</button>
+          <button class="btn" id="soundBtn">Sound: OFF</button>
+        </div>
+      </section>
+
+      <section class="card" id="modules">
+        <div class="card-title">SYSTEM MODULES</div>
+        <div class="modules">
+          <button class="module" data-module="AI Intelligence">
+            <div class="module-icon">◈</div>
+            <strong>AI Intelligence</strong>
+            <small>Gemini-powered conversation</small>
+          </button>
+          <button class="module" data-module="Voice Interface">
+            <div class="module-icon">◉</div>
+            <strong>Voice Interface</strong>
+            <small>Browser voice input and speech</small>
+          </button>
+          <button class="module" data-module="Automation Engine">
+            <div class="module-icon">⌘</div>
+            <strong>Automation Engine</strong>
+            <small>Automation features planned</small>
+          </button>
+          <button class="module" data-module="Vision System">
+            <div class="module-icon">◎</div>
+            <strong>Vision System</strong>
+            <small>Camera and image features planned</small>
+          </button>
+          <button class="module" data-module="Code Laboratory">
+            <div class="module-icon">⌘</div>
+            <strong>Code Laboratory</strong>
+            <small>Discuss and generate code with AI</small>
+          </button>
+          <button class="module" data-module="Security Guard">
+            <div class="module-icon">⬡</div>
+            <strong>Security Guard</strong>
+            <small>API key remains on the backend</small>
+          </button>
+        </div>
+      </section>
     </div>
-  </div>
 
-  <div class="section-label">INTELLIGENCE MODULES</div>
-  <div class="grid" id="modules">
-    <div class="card"><div class="icon">🧠</div><h3>AI Intelligence</h3><p>Ready for an AI brain connection. External AI is not connected yet.</p><span class="badge">AWAITING CONNECTION</span></div>
-    <div class="card"><div class="icon">🎙️</div><h3>Voice Interface</h3><p>Speak commands using supported browser speech recognition.</p><span class="badge">BROWSER FEATURE</span></div>
-    <div class="card"><div class="icon">⚙️</div><h3>Automation Engine</h3><p>Future module for approved workflows and repetitive tasks.</p><span class="badge">PLANNED</span></div>
-    <div class="card"><div class="icon">👁️</div><h3>Vision System</h3><p>Future screen understanding and visual assistance.</p><span class="badge">PLANNED</span></div>
-    <div class="card"><div class="icon">💻</div><h3>Code Laboratory</h3><p>Plan, build and debug projects with connected coding tools.</p><span class="badge">PLANNED</span></div>
-    <div class="card"><div class="icon">🛡️</div><h3>Security Guard</h3><p>Future safety checks and confirmation before sensitive actions.</p><span class="badge">PLANNED</span></div>
-  </div>
+    <section class="card chat-card" id="chat">
+      <div class="chat-head">
+        <div class="card-title">ARUK CONVERSATION</div>
+        <button class="btn" id="clearBtn">Clear</button>
+      </div>
 
-  <section class="chat" id="chatbox">
-    <h2>◈ &nbsp; ARUK CONSOLE</h2>
-    <div class="messages" id="messages" aria-live="polite">
-      <div class="msg"><b>ARUK:</b> Interface online. I can respond to basic local commands. An AI service has not been connected yet.</div>
+      <div class="messages" id="messages" aria-live="polite">
+        <div class="message ai">
+          <div class="who">ARUK AI</div>
+          Hello, Commander. I am ready to connect to my intelligence engine. Send me a message to begin.
+        </div>
+      </div>
+
+      <form class="chat-form" id="chatForm">
+        <input id="prompt" maxlength="4000" autocomplete="off"
+          placeholder="Ask ARUK AI anything..." aria-label="Message to ARUK AI" required>
+        <button class="btn primary send" id="sendBtn" type="submit">Send ↗️</button>
+      </form>
+      <div class="footer-note">
+        AI replies require an active backend and available Gemini API quota.
+        Device control and automation are not enabled by this chat alone.
+      </div>
+    </section>
+
+    <div class="stat-grid">
+      <div class="stat"><strong id="statStatus">READY</strong><small>INTERFACE STATUS</small></div>
+      <div class="stat"><strong>PRIVATE</strong><small>API KEY STORAGE</small></div>
+      <div class="stat"><strong>v2.0</strong><small>ARUK CORE</small></div>
     </div>
-    <form class="chat-form" id="chatForm">
-      <input id="prompt" autocomplete="off" placeholder="Type a command..." aria-label="Command">
-      <button class="btn primary" type="submit">SEND ↗️</button>
-    </form>
-  </section>
-
-  <section id="settings" class="card" style="margin-top:20px">
-    <h3>⚙️ System Settings</h3>
-    <p>Sound effects are generated locally. Voice playback uses your browser's speech engine. No external AI service is connected.</p>
-    <div class="actions"><button class="btn" id="testBtn">Test Voice</button><button class="btn" id="clearBtn">Clear Console</button></div>
-  </section>
-</main>
+  </main>
 </div>
-<footer>ARUK AI · PERSONAL INTELLIGENCE PROJECT · BUILT STEP BY STEP</footer>
+
+<div id="toast" role="status"></div>
+
 <script>
-const $=id=>document.getElementById(id);
-let soundOn=false,audioCtx=null;
-function setStatus(s){$('status').textContent=s}
-function say(text){
- if(!('speechSynthesis' in window)){reply("Speech output is not supported by this browser.");return}
- speechSynthesis.cancel();
- const u=new SpeechSynthesisUtterance(text);
- u.lang='en-GB';u.rate=.95;u.pitch=.85;
- u.onstart=()=>$('orb').classList.add('speaking');
- u.onend=()=> $('orb').classList.remove('speaking');
- speechSynthesis.speak(u);
-}
-function beep(freq=440,duration=.12){
- if(!soundOn)return;
- try{
-  audioCtx=audioCtx||new(window.AudioContext||window.webkitAudioContext)();
-  const o=audioCtx.createOscillator(),g=audioCtx.createGain();
-  o.type='sine';o.frequency.value=freq;g.gain.value=.035;
-  o.connect(g);g.connect(audioCtx.destination);o.start();
-  g.gain.exponentialRampToValueAtTime(.001,audioCtx.currentTime+duration);
-  o.stop(audioCtx.currentTime+duration);
- }catch(e){}
-}
-function addMessage(who,text){
- const d=document.createElement('div');d.className='msg';
- const b=document.createElement('b');b.textContent=who+': ';
- d.appendChild(b);d.appendChild(document.createTextNode(text));
- $('messages').appendChild(d);$('messages').scrollTop=$('messages').scrollHeight;
-}
-function reply(text){addMessage('ARUK',text);setStatus('Response ready');beep(620);if(soundOn)say(text)}
-function command(raw){
- const t=raw.trim().toLowerCase();
- if(!t)return;
- addMessage('YOU',raw);beep(340);
- if(/\b(hello|hi|hey|namaste)\b/.test(t))return reply("Hello, Commander. ARUK interface is online. What are we building today?");
- if(t.includes('time'))return reply('The current computer time is '+new Date().toLocaleTimeString()+'.');
- if(t.includes('date'))return reply('Today is '+new Date().toLocaleDateString()+'.');
- if(t.includes('who are you')||t.includes('your name'))return reply('I am ARUK AI, your personal intelligence project. My AI brain and PC-control modules still need to be connected.');
- if(t.includes('help')||t.includes('command'))return reply('Available demo commands: hello, time, date, who are you, open YouTube, open Google, voice test. These are local browser features, not full AI.');
- if(t.includes('voice')){say('ARUK voice system online. Ready for your next instruction.');return reply('Starting browser voice output.');}
- if(t.includes('open youtube')){window.open('https://www.youtube.com','_blank','noopener');return reply('Opening YouTube in a new tab.');}
- if(t.includes('open google')){window.open('https://www.google.com','_blank','noopener');return reply('Opening Google in a new tab.');}
- reply('I received your command, but my AI brain is not connected yet. We will add real AI and approved PC-control tools in later stages.');
-}
-$('chatForm').addEventListener('submit',e=>{e.preventDefault();command($('prompt').value);$('prompt').value='';});
-$('soundBtn').addEventListener('click',()=>{
- soundOn=!soundOn;$('soundBtn').textContent='♫ Sound: '+(soundOn?'ON':'OFF');
- if(soundOn){beep(520);setStatus('Sound effects enabled')}else setStatus('Sound effects disabled');
-});
-$('voiceBtn').addEventListener('click',()=>{
- const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
- if(!SR){reply('Speech recognition is not available in this browser. Try a supported browser or type in the console.');return}
- const r=new SR();r.lang='en-IN';r.interimResults=false;r.maxAlternatives=1;
- setStatus('Listening — speak now');
- r.onresult=e=>command(e.results[0][0].transcript);
- r.onerror=e=>{setStatus('Microphone unavailable');addMessage('SYSTEM','Voice error: '+e.error+'. Check microphone permission.');};
- r.onend=()=>{if($('status').textContent.startsWith('Listening'))setStatus('Core interface initialized')};
- try{r.start()}catch(e){reply('Could not start microphone. Try again.')}
-});
-$('testBtn').addEventListener('click',()=>say('ARUK AI online. Your personal intelligence system is ready to grow.'));
-$('clearBtn').addEventListener('click',()=>{$('messages').replaceChildren();addMessage('ARUK','Console cleared. Ready.');});
-document.querySelectorAll('.nav').forEach(b=>b.addEventListener('click',()=>{
- document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active'));b.classList.add('active');
- const target=b.dataset.target;
- if(target==='home')window.scrollTo({top:0,behavior:'smooth'});
- else $(target).scrollIntoView({behavior:'smooth',block:'start'});
-}));
-setInterval(()=>{const d=new Date();document.title='ARUK AI | '+d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});},15000);
+(() => {
+  "use strict";
+
+  // The API key stays in Cloudflare. Never put it in this file.
+  const API_URL = "https://aruk-ai-brain.arukgab.workers.dev/chat";
+
+  const $ = id => document.getElementById(id);
+  const messages = $("messages");
+  let soundOn = false;
+  let busy = false;
+  let audioContext = null;
+
+  function toast(text) {
+    const el = $("toast");
+    el.textContent = text;
+    el.style.display = "block";
+    clearTimeout(toast.timer);
+    toast.timer = setTimeout(() => el.style.display = "none", 3500);
+  }
+
+  function setStatus(text, connected = false) {
+    $("systemStatus").textContent = text;
+    $("connection").textContent = connected ? "AI backend connected" : "Interface ready";
+    $("statStatus").textContent = connected ? "CONNECTED" : "READY";
+  }
+
+  function beep(freq = 520) {
+    if (!soundOn) return;
+    try {
+      audioContext ||= new (window.AudioContext || window.webkitAudioContext)();
+      const oscillator = audioContext.createOscillator();
+      const gain = audioContext.createGain();
+      oscillator.frequency.value = freq;
+      oscillator.connect(gain);
+      gain.connect(audioContext.destination);
+      gain.gain.value = 0.045;
+      oscillator.start();
+      oscillator.stop(audioContext.currentTime + 0.08);
+    } catch (_) {}
+  }
+
+  function addMessage(who, text) {
+    const box = document.createElement("div");
+    box.className = "message " + (who === "YOU" ? "user" : "ai");
+
+    const label = document.createElement("div");
+    label.className = "who";
+    label.textContent = who;
+
+    const content = document.createElement("div");
+    content.textContent = text;
+
+    box.append(label, content);
+    messages.appendChild(box);
+    messages.scrollTop = messages.scrollHeight;
+    return box;
+  }
+
+  async function askAI(message) {
+    const response = await fetch(API_URL, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ message })
+    });
+
+    let data;
+    try {
+      data = await response.json();
+    } catch (_) {
+      throw new Error("The backend returned an unreadable response.");
+    }
+
+    if (!response.ok) {
+      throw new Error(data.error || "Backend request failed (" + response.status + ").");
+    }
+    if (!data.reply) {
+      throw new Error(data.error || "The AI returned no reply.");
+    }
+    return data.reply;
+  }
+
+  async function sendMessage(raw) {
+    const text = String(raw || "").trim();
+    if (!text || busy) return;
+
+    if (text.length > 4000) {
+      toast("Please keep your message under 4000 characters.");
+      return;
+    }
+
+    addMessage("YOU", text);
+    $("prompt").value = "";
+    busy = true;
+    $("sendBtn").disabled = true;
+    $("sendBtn").textContent = "Wait…";
+    $("orb").classList.add("speaking");
+    $("heroTitle").textContent = "Processing your request";
+    $("heroDesc").textContent = "ARUK AI is contacting the intelligence engine.";
+    setStatus("CONTACTING AI ENGINE");
+    beep(650);
+
+    const thinking = addMessage("ARUK AI", "Thinking…");
+
+    try {
+      const reply = await askAI(text);
+      thinking.lastElementChild.textContent = reply;
+      setStatus("AI RESPONSE RECEIVED", true);
+      $("heroTitle").textContent = "Intelligence engine responded";
+      $("heroDesc").textContent = "Your message was processed by the connected AI backend.";
+      beep(820);
+      if (soundOn) speak(reply);
+    } catch (error) {
+      thinking.lastElementChild.textContent =
+        "I couldn't get a response from the AI backend.\n\n" +
+        error.message +
+        "\n\nCheck that GEMINI_API_KEY is configured as a Cloudflare Secret and the Worker is deployed.";
+      setStatus("CONNECTION NEEDS CHECK");
+      $("heroTitle").textContent = "Connection needs attention";
+      $("heroDesc").textContent = "The interface is running, but the AI request failed.";
+      toast("AI request failed. Check the message in the conversation.");
+      console.error("ARUK AI request error:", error);
+    } finally {
+      busy = false;
+      $("sendBtn").disabled = false;
+      $("sendBtn").textContent = "Send ↗️";
+      $("orb").classList.remove("speaking");
+      messages.scrollTop = messages.scrollHeight;
+    }
+  }
+
+  function speak(text) {
+    if (!("speechSynthesis" in window)) {
+      toast("Speech output is not supported in this browser.");
+      return;
+    }
+    window.speechSynthesis.cancel();
+    const utterance = new SpeechSynthesisUtterance(text);
+    utterance.lang = "en-IN";
+    utterance.rate = 1;
+    window.speechSynthesis.speak(utterance);
+  }
+
+  $("chatForm").addEventListener("submit", event => {
+    event.preventDefault();
+    sendMessage($("prompt").value);
+  });
+
+  $("focusChat").addEventListener("click", () => {
+    $("chat").scrollIntoView({ behavior: "smooth" });
+    $("prompt").focus();
+  });
+
+  $("soundBtn").addEventListener("click", () => {
+    soundOn = !soundOn;
+    $("soundBtn").textContent = "Sound: " + (soundOn ? "ON" : "OFF");
+    if (soundOn) {
+      beep(700);
+      toast("Sound effects enabled.");
+    } else {
+      if ("speechSynthesis" in window) window.speechSynthesis.cancel();
+      toast("Sound effects disabled.");
+    }
+  });
+
+  $("voiceBtn").addEventListener("click", () => {
+    const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if (!Recognition) {
+      toast("Voice input is not supported here. Please type your message.");
+      return;
+    }
+    const recognition = new Recognition();
+    recognition.lang = "en-IN";
+    recognition.interimResults = false;
+    recognition.maxAlternatives = 1;
+
+    $("heroTitle").textContent = "Listening";
+    $("heroDesc").textContent = "Speak clearly into your microphone.";
+    setStatus("LISTENING");
+    $("orb").classList.add("speaking");
+
+    recognition.onresult = event => {
+      const transcript = event.results[0][0].transcript;
+      $("prompt").value = transcript;
+      sendMessage(transcript);
+    };
+    recognition.onerror = event => {
+      toast("Voice input error: " + event.error);
+      setStatus("VOICE INPUT STOPPED");
+      $("orb").classList.remove("speaking");
+    };
+    recognition.onend = () => $("orb").classList.remove("speaking");
+    try {
+      recognition.start();
+    } catch (_) {
+      toast("Could not start microphone. Try again.");
+      $("orb").classList.remove("speaking");
+    }
+  });
+
+  $("clearBtn").addEventListener("click", () => {
+    if (busy) {
+      toast("Wait until the current response finishes.");
+      return;
+    }
+    messages.replaceChildren();
+    addMessage("ARUK AI", "Conversation cleared. What would you like to work on next?");
+  });
+
+  document.querySelectorAll("[data-target]").forEach(button => {
+    button.addEventListener("click", () => {
+      document.querySelectorAll(".nav").forEach(nav => nav.classList.remove("active"));
+      button.classList.add("active");
+      const target = $(button.dataset.target);
+      if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+  });
+
+  document.querySelectorAll("[data-module]").forEach(button => {
+    button.addEventListener("click", () => {
+      const module = button.dataset.module;
+      $("chat").scrollIntoView({ behavior: "smooth" });
+      $("prompt").focus();
+
+      const prompts = {
+        "AI Intelligence": "Introduce yourself as ARUK AI and explain what you can help me with.",
+        "Voice Interface": "Explain how to use the voice interface and its current limitations.",
+        "Automation Engine": "Help me plan a safe automation engine for ARUK AI.",
+        "Vision System": "Help me plan an image and vision system for ARUK AI.",
+        "Code Laboratory": "Help me write, understand, or debug code for my project.",
+        "Security Guard": "Review the security steps needed to protect my ARUK AI backend."
+      };
+      $("prompt").value = prompts[module] || ("Help me with " + module + ".");
+    });
+  });
+
+  setInterval(() => {
+    const now = new Date();
+    document.title = "ARUK AI | " +
+      now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  }, 15000);
+
+  console.log("ARUK AI interface initialized.");
+})();
 </script>
 </body>
 </html>
